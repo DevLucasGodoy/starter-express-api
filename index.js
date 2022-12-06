@@ -1,18 +1,20 @@
-const app = require('./app');
 const express = require('express');
-const router = express.Router();
-const Controller = require('./controllers/Controllers');
-const Middleware = require('./middlewares/middlewarePro');
+const cors = require('cors')
+const app = express();
+const PORT = process.env.PORT || 4000;
+const Produto = require('./models/Produto')
 
-require('dotenv').config();
+app.set("view engine", "ejs")
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use(cors())
 
-router.get('/', (req, res) => res.status(200).send('API Projeto Final'));
-router.get('/produtos', Controller.getAll);
-router.post('/produtos', Middleware.validarNome ,Controller.createPro);
-router.delete('/produtos/:id');
-router.put('/produtos/:id', Middleware.validarNome);
+app.get('/', async function (req, res){
+    const response = await Produto.findAll()
+    res.json(response)
+})
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
-
-module.exports = router;
+app.listen(PORT, () => {
+    console.log('Servidor rodando em http://localhost:' + PORT)
+  })
