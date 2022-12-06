@@ -1,3 +1,3 @@
-# ProjetoFinal
-Projeto final de informática na INFO 6.
-Alunos: Lucas Godoy e Jorge Leandro
+# Projeto Final da INFO 6
+
+Alunos: Lucas Moraes Godoy e Jorhe Leandro Lima Carvalho.
